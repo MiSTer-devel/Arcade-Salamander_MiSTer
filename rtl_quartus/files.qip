@@ -1,0 +1,12 @@
+set_global_assignment -name SDC_FILE Salamander.sdc
+set_global_assignment -name SYSTEMVERILOG_FILE Salamander.sv
+
+set_global_assignment -name QIP_FILE rtl/pll.qip
+set_global_assignment -name VERILOG_FILE rtl/Salamander_emu.v
+set_global_assignment -name VERILOG_FILE rtl/Salamander_top.v
+set_global_assignment -name VERILOG_FILE rtl/Salamander_cpu.v
+set_global_assignment -name VERILOG_FILE rtl/Salamander_components/Salamander_PROM.v
+set_global_assignment -name VERILOG_FILE rtl/Salamander_components/Salamander_SRAM.v
+set_global_assignment -name QIP_FILE rtl/GX400_video/GX400_video.qip
+set_global_assignment -name QIP_FILE rtl/ipcores/fx68k/fx68k.qip
+set_global_assignment -name QIP_FILE rtl/ipcores/jtframe_sdram/jtframe_sdram64.qip

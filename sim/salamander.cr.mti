@@ -1,0 +1,323 @@
+D:/cores/ikacore_Salamander/sim/GX400_video/K005295.v {1 {vlog -work work -stats=none D:/cores/ikacore_Salamander/sim/GX400_video/K005295.v
+Model Technology ModelSim - Intel FPGA Edition vlog 10.5b Compiler 2016.10 Oct  5 2016
+-- Compiling module K005295
+
+Top level modules:
+	K005295
+
+} {} {}} D:/cores/ikacore_Salamander/sim/Salamander_sound.v {1 {vlog -work work -stats=none D:/cores/ikacore_Salamander/sim/Salamander_sound.v
+Model Technology ModelSim - Intel FPGA Edition vlog 10.5b Compiler 2016.10 Oct  5 2016
+
+} {} {}} D:/cores/ikacore_Salamander/sim/ipcores/jtframe_sdram/jtframe_rom.v {1 {vlog -work work -stats=none D:/cores/ikacore_Salamander/sim/ipcores/jtframe_sdram/jtframe_rom.v
+Model Technology ModelSim - Intel FPGA Edition vlog 10.5b Compiler 2016.10 Oct  5 2016
+-- Compiling module jtframe_rom
+
+Top level modules:
+	jtframe_rom
+
+} {} {}} D:/cores/ikacore_Salamander/sim/ipcores/IKAOPM/IKAOPM_modules/IKAOPM_primitives.v {1 {vlog -work work -stats=none D:/cores/ikacore_Salamander/sim/ipcores/IKAOPM/IKAOPM_modules/IKAOPM_primitives.v
+Model Technology ModelSim - Intel FPGA Edition vlog 10.5b Compiler 2016.10 Oct  5 2016
+-- Compiling module primitive_srlatch
+-- Compiling module primitive_dlatch
+-- Compiling module primitive_syncsrlatch
+-- Compiling module primitive_syncdlatch
+-- Compiling module primitive_counter
+-- Compiling module primitive_sr
+-- Compiling module primitive_sr_bram
+
+Top level modules:
+	primitive_srlatch
+	primitive_dlatch
+	primitive_syncsrlatch
+	primitive_syncdlatch
+	primitive_counter
+	primitive_sr
+	primitive_sr_bram
+
+} {} {}} D:/cores/ikacore_Salamander/sim/GX400_video/GX400_video.v {1 {vlog -work work -stats=none D:/cores/ikacore_Salamander/sim/GX400_video/GX400_video.v
+Model Technology ModelSim - Intel FPGA Edition vlog 10.5b Compiler 2016.10 Oct  5 2016
+-- Compiling module GX400_video
+-- Compiling module GX400_video_asynclatch
+
+Top level modules:
+	GX400_video
+
+} {} {}} D:/cores/ikacore_Salamander/sim/ipcores/IKAOPM/IKAOPM_modules/IKAOPM_noise.v {1 {vlog -work work -stats=none D:/cores/ikacore_Salamander/sim/ipcores/IKAOPM/IKAOPM_modules/IKAOPM_noise.v
+Model Technology ModelSim - Intel FPGA Edition vlog 10.5b Compiler 2016.10 Oct  5 2016
+-- Compiling module IKAOPM_noise
+
+Top level modules:
+	IKAOPM_noise
+
+} {} {}} D:/cores/ikacore_Salamander/sim/ipcores/jtframe_sdram/jtframe_sdram64.v {1 {vlog -work work -stats=none D:/cores/ikacore_Salamander/sim/ipcores/jtframe_sdram/jtframe_sdram64.v
+Model Technology ModelSim - Intel FPGA Edition vlog 10.5b Compiler 2016.10 Oct  5 2016
+-- Compiling module jtframe_sdram64
+
+Top level modules:
+	jtframe_sdram64
+
+} {} {}} D:/cores/ikacore_Salamander/sim/ipcores/jtframe_sdram/jtframe_romrq.v {1 {vlog -work work -stats=none D:/cores/ikacore_Salamander/sim/ipcores/jtframe_sdram/jtframe_romrq.v
+Model Technology ModelSim - Intel FPGA Edition vlog 10.5b Compiler 2016.10 Oct  5 2016
+-- Compiling module jtframe_romrq
+
+Top level modules:
+	jtframe_romrq
+
+} {} {}} D:/cores/ikacore_Salamander/sim/ipcores/IKAOPM/IKAOPM_modules/IKAOPM_acc.v {1 {vlog -work work -stats=none D:/cores/ikacore_Salamander/sim/ipcores/IKAOPM/IKAOPM_modules/IKAOPM_acc.v
+Model Technology ModelSim - Intel FPGA Edition vlog 10.5b Compiler 2016.10 Oct  5 2016
+-- Compiling module IKAOPM_acc
+
+Top level modules:
+	IKAOPM_acc
+
+} {} {}} D:/cores/ikacore_Salamander/sim/GX400_video/GX400_video_dram.v {1 {vlog -work work -stats=none D:/cores/ikacore_Salamander/sim/GX400_video/GX400_video_dram.v
+Model Technology ModelSim - Intel FPGA Edition vlog 10.5b Compiler 2016.10 Oct  5 2016
+-- Compiling module GX400_video_dram
+
+Top level modules:
+	GX400_video_dram
+
+} {} {}} D:/cores/ikacore_Salamander/sim/ipcores/jtframe_sdram/jtframe_rom_sync.v {1 {vlog -work work -stats=none D:/cores/ikacore_Salamander/sim/ipcores/jtframe_sdram/jtframe_rom_sync.v
+Model Technology ModelSim - Intel FPGA Edition vlog 10.5b Compiler 2016.10 Oct  5 2016
+-- Compiling module jtframe_rom_sync
+
+Top level modules:
+	jtframe_rom_sync
+
+} {} {}} D:/cores/ikacore_Salamander/sim/ipcores/jtframe_sdram/jtframe_sdram64_rfsh.v {1 {vlog -work work -stats=none D:/cores/ikacore_Salamander/sim/ipcores/jtframe_sdram/jtframe_sdram64_rfsh.v
+Model Technology ModelSim - Intel FPGA Edition vlog 10.5b Compiler 2016.10 Oct  5 2016
+-- Compiling module jtframe_sdram64_rfsh
+
+Top level modules:
+	jtframe_sdram64_rfsh
+
+} {} {}} D:/cores/ikacore_Salamander/sim/ipcores/IKAOPM/IKAOPM_modules/IKAOPM_timer.v {1 {vlog -work work -stats=none D:/cores/ikacore_Salamander/sim/ipcores/IKAOPM/IKAOPM_modules/IKAOPM_timer.v
+Model Technology ModelSim - Intel FPGA Edition vlog 10.5b Compiler 2016.10 Oct  5 2016
+-- Compiling module IKAOPM_timer
+
+Top level modules:
+	IKAOPM_timer
+
+} {} {}} D:/cores/ikacore_Salamander/sim/ipcores/IKAOPM/IKAOPM_modules/IKAOPM_lfo.v {1 {vlog -work work -stats=none D:/cores/ikacore_Salamander/sim/ipcores/IKAOPM/IKAOPM_modules/IKAOPM_lfo.v
+Model Technology ModelSim - Intel FPGA Edition vlog 10.5b Compiler 2016.10 Oct  5 2016
+-- Compiling module IKAOPM_lfo
+
+Top level modules:
+	IKAOPM_lfo
+
+} {} {}} D:/cores/ikacore_Salamander/sim/ipcores/mt48lc16m16a2.v {1 {vlog -work work -stats=none D:/cores/ikacore_Salamander/sim/ipcores/mt48lc16m16a2.v
+Model Technology ModelSim - Intel FPGA Edition vlog 10.5b Compiler 2016.10 Oct  5 2016
+-- Compiling module mt48lc16m16a2
+
+Top level modules:
+	mt48lc16m16a2
+
+} {} {}} D:/cores/ikacore_Salamander/sim/ipcores/fx68k/fx68kAlu.sv {1 {vlog -work work -sv -stats=none D:/cores/ikacore_Salamander/sim/ipcores/fx68k/fx68kAlu.sv
+Model Technology ModelSim - Intel FPGA Edition vlog 10.5b Compiler 2016.10 Oct  5 2016
+-- Compiling package fx68kAlu_sv_unit
+-- Compiling module fx68kAlu
+-- Compiling module aluCorf
+-- Compiling module aluShifter
+-- Compiling module aluGetOp
+-- Compiling module rowDecoder
+-- Compiling module ccrTable
+
+Top level modules:
+	fx68kAlu
+
+} {} {}} D:/cores/ikacore_Salamander/sim/Salamander_components/Salamander_SRAM.v {1 {vlog -work work -stats=none D:/cores/ikacore_Salamander/sim/Salamander_components/Salamander_SRAM.v
+Model Technology ModelSim - Intel FPGA Edition vlog 10.5b Compiler 2016.10 Oct  5 2016
+-- Compiling module Salamander_SRAM
+
+Top level modules:
+	Salamander_SRAM
+
+} {} {}} D:/cores/ikacore_Salamander/sim/ipcores/jtframe_sdram/jtframe_sdram64_latch.v {1 {vlog -work work -stats=none D:/cores/ikacore_Salamander/sim/ipcores/jtframe_sdram/jtframe_sdram64_latch.v
+Model Technology ModelSim - Intel FPGA Edition vlog 10.5b Compiler 2016.10 Oct  5 2016
+-- Compiling module jtframe_sdram64_latch
+
+Top level modules:
+	jtframe_sdram64_latch
+
+} {} {}} D:/cores/ikacore_Salamander/sim/ipcores/jtframe_sdram/jtframe_sdram64_bank.v {1 {vlog -work work -stats=none D:/cores/ikacore_Salamander/sim/ipcores/jtframe_sdram/jtframe_sdram64_bank.v
+Model Technology ModelSim - Intel FPGA Edition vlog 10.5b Compiler 2016.10 Oct  5 2016
+-- Compiling module jtframe_sdram64_bank
+
+Top level modules:
+	jtframe_sdram64_bank
+
+} {} {}} D:/cores/ikacore_Salamander/sim/ipcores/jtframe_sdram/jtframe_rom_2slots.v {1 {vlog -work work -stats=none D:/cores/ikacore_Salamander/sim/ipcores/jtframe_sdram/jtframe_rom_2slots.v
+Model Technology ModelSim - Intel FPGA Edition vlog 10.5b Compiler 2016.10 Oct  5 2016
+-- Compiling module jtframe_rom_2slots
+
+Top level modules:
+	jtframe_rom_2slots
+
+} {} {}} D:/cores/ikacore_Salamander/sim/ipcores/IKAOPM/IKAOPM_modules/IKAOPM_timinggen.v {1 {vlog -work work -stats=none D:/cores/ikacore_Salamander/sim/ipcores/IKAOPM/IKAOPM_modules/IKAOPM_timinggen.v
+Model Technology ModelSim - Intel FPGA Edition vlog 10.5b Compiler 2016.10 Oct  5 2016
+-- Compiling module IKAOPM_timinggen
+
+Top level modules:
+	IKAOPM_timinggen
+
+} {} {}} D:/cores/ikacore_Salamander/sim/ipcores/IKAOPM/IKAOPM_modules/IKAOPM_eg.v {1 {vlog -work work -stats=none D:/cores/ikacore_Salamander/sim/ipcores/IKAOPM/IKAOPM_modules/IKAOPM_eg.v
+Model Technology ModelSim - Intel FPGA Edition vlog 10.5b Compiler 2016.10 Oct  5 2016
+-- Compiling module IKAOPM_eg
+
+Top level modules:
+	IKAOPM_eg
+
+} {} {}} D:/cores/ikacore_Salamander/sim/Salamander_ioctl_test.v {1 {vlog -work work -stats=none D:/cores/ikacore_Salamander/sim/Salamander_ioctl_test.v
+Model Technology ModelSim - Intel FPGA Edition vlog 10.5b Compiler 2016.10 Oct  5 2016
+-- Compiling module Salamander_ioctl_test
+
+Top level modules:
+	Salamander_ioctl_test
+
+} {} {}} D:/cores/ikacore_Salamander/sim/GX400_video/GX400_video_sim.v {1 {vlog -work work -stats=none D:/cores/ikacore_Salamander/sim/GX400_video/GX400_video_sim.v
+Model Technology ModelSim - Intel FPGA Edition vlog 10.5b Compiler 2016.10 Oct  5 2016
+-- Compiling module GX400_video_sim
+
+Top level modules:
+	GX400_video_sim
+
+} {} {}} D:/cores/ikacore_Salamander/sim/Salamander_components/Salamander_PROM.v {1 {vlog -work work -stats=none D:/cores/ikacore_Salamander/sim/Salamander_components/Salamander_PROM.v
+Model Technology ModelSim - Intel FPGA Edition vlog 10.5b Compiler 2016.10 Oct  5 2016
+-- Compiling module Salamander_PROM
+
+Top level modules:
+	Salamander_PROM
+
+} {} {}} D:/cores/ikacore_Salamander/sim/Salamander_top.v {1 {vlog -work work -stats=none D:/cores/ikacore_Salamander/sim/Salamander_top.v
+Model Technology ModelSim - Intel FPGA Edition vlog 10.5b Compiler 2016.10 Oct  5 2016
+-- Compiling module Salamander_top
+
+Top level modules:
+	Salamander_top
+
+} {} {}} D:/cores/ikacore_Salamander/sim/ipcores/fx68k/uaddrPla.sv {1 {vlog -work work -sv -stats=none D:/cores/ikacore_Salamander/sim/ipcores/fx68k/uaddrPla.sv
+Model Technology ModelSim - Intel FPGA Edition vlog 10.5b Compiler 2016.10 Oct  5 2016
+-- Compiling module pla_lined
+
+Top level modules:
+	pla_lined
+
+} {} {}} D:/cores/ikacore_Salamander/sim/ipcores/IKAOPM/IKAOPM_modules/IKAOPM_reg.v {1 {vlog -work work -stats=none D:/cores/ikacore_Salamander/sim/ipcores/IKAOPM/IKAOPM_modules/IKAOPM_reg.v
+Model Technology ModelSim - Intel FPGA Edition vlog 10.5b Compiler 2016.10 Oct  5 2016
+-- Compiling module IKAOPM_reg
+-- Compiling module reg_submdl_loreg_decoder
+
+Top level modules:
+	IKAOPM_reg
+
+} {} {}} D:/cores/ikacore_Salamander/sim/ipcores/IKAOPM/IKAOPM_modules/IKAOPM_pg.v {1 {vlog -work work -stats=none D:/cores/ikacore_Salamander/sim/ipcores/IKAOPM/IKAOPM_modules/IKAOPM_pg.v
+Model Technology ModelSim - Intel FPGA Edition vlog 10.5b Compiler 2016.10 Oct  5 2016
+-- Compiling module IKAOPM_pg
+-- Compiling module pg_submdl_fnumrom
+
+Top level modules:
+	IKAOPM_pg
+
+} {} {}} D:/cores/ikacore_Salamander/sim/ipcores/IKAOPM/IKAOPM_modules/IKAOPM_op.v {1 {vlog -work work -stats=none D:/cores/ikacore_Salamander/sim/ipcores/IKAOPM/IKAOPM_modules/IKAOPM_op.v
+Model Technology ModelSim - Intel FPGA Edition vlog 10.5b Compiler 2016.10 Oct  5 2016
+-- Compiling module IKAOPM_op
+-- Compiling module op_submdl_logsinrom
+-- Compiling module op_submdl_exprom
+
+Top level modules:
+	IKAOPM_op
+
+} {} {}} D:/cores/ikacore_Salamander/sim/GX400_video/GX400_video_sram.v {1 {vlog -work work -stats=none D:/cores/ikacore_Salamander/sim/GX400_video/GX400_video_sram.v
+Model Technology ModelSim - Intel FPGA Edition vlog 10.5b Compiler 2016.10 Oct  5 2016
+-- Compiling module GX400_video_sram
+
+Top level modules:
+	GX400_video_sram
+
+} {} {}} D:/cores/ikacore_Salamander/sim/GX400_video/K005290.v {1 {vlog -work work -stats=none D:/cores/ikacore_Salamander/sim/GX400_video/K005290.v
+Model Technology ModelSim - Intel FPGA Edition vlog 10.5b Compiler 2016.10 Oct  5 2016
+-- Compiling module K005290
+
+Top level modules:
+	K005290
+
+} {} {}} D:/cores/ikacore_Salamander/sim/ipcores/fx68k/fx68k.sv {1 {vlog -work work -sv -stats=none D:/cores/ikacore_Salamander/sim/ipcores/fx68k/fx68k.sv
+Model Technology ModelSim - Intel FPGA Edition vlog 10.5b Compiler 2016.10 Oct  5 2016
+-- Compiling package fx68k_sv_unit
+-- Compiling module fx68k
+-- Compiling module nDecoder3
+-- Compiling module irdDecode
+-- Compiling module excUnit
+-- Compiling module dataIo
+-- Compiling module uaddrDecode
+-- Compiling module onehotEncoder4
+-- Compiling module pren
+-- Compiling module sequencer
+-- Compiling module busArbiter
+-- Compiling module busControl
+-- Compiling module uRom
+-- Compiling module nanoRom
+-- Compiling module microToNanoAddr
+
+Top level modules:
+	fx68k
+
+} {} {}} D:/cores/ikacore_Salamander/sim/GX400_video/K005291.v {1 {vlog -work work -stats=none D:/cores/ikacore_Salamander/sim/GX400_video/K005291.v
+Model Technology ModelSim - Intel FPGA Edition vlog 10.5b Compiler 2016.10 Oct  5 2016
+-- Compiling module K005291
+
+Top level modules:
+	K005291
+
+} {} {}} D:/cores/ikacore_Salamander/sim/Salamander_tb.v {1 {vlog -work work -stats=none D:/cores/ikacore_Salamander/sim/Salamander_tb.v
+Model Technology ModelSim - Intel FPGA Edition vlog 10.5b Compiler 2016.10 Oct  5 2016
+-- Compiling module Salamander_tb
+
+Top level modules:
+	Salamander_tb
+
+} {} {}} D:/cores/ikacore_Salamander/sim/ipcores/jtframe_sdram/jtframe_ram1_1slot.v {1 {vlog -work work -stats=none D:/cores/ikacore_Salamander/sim/ipcores/jtframe_sdram/jtframe_ram1_1slot.v
+Model Technology ModelSim - Intel FPGA Edition vlog 10.5b Compiler 2016.10 Oct  5 2016
+-- Compiling module jtframe_ram1_1slot
+
+Top level modules:
+	jtframe_ram1_1slot
+
+} {} {}} D:/cores/ikacore_Salamander/sim/ipcores/IKAOPM/IKAOPM.v {1 {vlog -work work -stats=none D:/cores/ikacore_Salamander/sim/ipcores/IKAOPM/IKAOPM.v
+Model Technology ModelSim - Intel FPGA Edition vlog 10.5b Compiler 2016.10 Oct  5 2016
+-- Compiling module IKAOPM
+
+Top level modules:
+	IKAOPM
+
+} {} {}} D:/cores/ikacore_Salamander/sim/GX400_video/K005292.v {1 {vlog -work work -stats=none D:/cores/ikacore_Salamander/sim/GX400_video/K005292.v
+Model Technology ModelSim - Intel FPGA Edition vlog 10.5b Compiler 2016.10 Oct  5 2016
+-- Compiling module K005292
+-- Compiling module K005292_real
+
+Top level modules:
+	K005292
+	K005292_real
+
+} {} {}} D:/cores/ikacore_Salamander/sim/ipcores/jtframe_sdram/jtframe_sdram64_init.v {1 {vlog -work work -stats=none D:/cores/ikacore_Salamander/sim/ipcores/jtframe_sdram/jtframe_sdram64_init.v
+Model Technology ModelSim - Intel FPGA Edition vlog 10.5b Compiler 2016.10 Oct  5 2016
+-- Compiling module jtframe_sdram64_init
+
+Top level modules:
+	jtframe_sdram64_init
+
+} {} {}} D:/cores/ikacore_Salamander/sim/GX400_video/K005293.v {1 {vlog -work work -stats=none D:/cores/ikacore_Salamander/sim/GX400_video/K005293.v
+Model Technology ModelSim - Intel FPGA Edition vlog 10.5b Compiler 2016.10 Oct  5 2016
+-- Compiling module K005293
+
+Top level modules:
+	K005293
+
+} {} {}} D:/cores/ikacore_Salamander/sim/GX400_video/K005294.v {1 {vlog -work work -stats=none D:/cores/ikacore_Salamander/sim/GX400_video/K005294.v
+Model Technology ModelSim - Intel FPGA Edition vlog 10.5b Compiler 2016.10 Oct  5 2016
+-- Compiling module K005294
+
+Top level modules:
+	K005294
+
+} {} {}}
