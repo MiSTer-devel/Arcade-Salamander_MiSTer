@@ -1,0 +1,22 @@
+{
+	"system" : {
+		"platform" : "windows64",
+		"os_name" : "Windows 10",
+		"os_version" : "10.0"
+	},
+	"error" : {
+		"executable" : "quartus",
+		"comment" : "not_applicable",
+		"error_message" : "Access Violation at 0X000001F8ED249940",
+		"source_file" : "unknown",
+		"line" : "0",
+		"stack_trace" : "\t0x1f8ed24993f:\n\t 0x69e5126b: QtGui4 + 0x36126b (?text@QStandardItem@@QEBA?AVQString@@XZ + 0x2b)\n\t0x7ffa051331bb: resr_flowg + 0x31bb (?add_pr_revisions@FLOWG_REVISIONS_LIST@@IEAAXPEAVQStandardItem@@W4ACF_VARIABLE_TYPE_ENUM@@W4ACF_ENUM_VALUE_ENUM@@@Z + 0x9b)\n\t0x7ffa0513709d: resr_flowg + 0x709d (?load_revisions@FLOWG_REVISIONS_LIST@@QEAAXXZ + 0x48d)\n\t 0x6991f9f7: QtCore4 + 0x11f9f7 (?event@QObject@@UEAA_NPEAVQEvent@@@Z + 0xe7)\n\t 0x69b51402: QtGui4 + 0x61402 (?event@QWidget@@MEAA_NPEAVQEvent@@@Z + 0xd42)\n\t 0x69e72676: QtGui4 + 0x382676 (?event@QFrame@@MEAA_NPEAVQEvent@@@Z + 0x36)\n\t 0x69ee3587: QtGui4 + 0x3f3587 (?event@QAbstractScrollArea@@MEAA_NPEAVQEvent@@@Z + 0x257)\n\t 0x69b12e95: QtGui4 + 0x22e95 (?notify_helper@QApplicationPrivate@@QEAA_NPEAVQObject@@PEAVQEvent@@@Z + 0xf5)\n\t 0x69b12b2f: QtGui4 + 0x22b2f (?notify@QApplication@@UEAA_NPEAVQObject@@PEAVQEvent@@@Z + 0x17bf)\n\t 0x6990d92b: QtCore4 + 0x10d92b (?notifyInternal@QCoreApplication@@AEAA_NPEAVQObject@@PEAVQEvent@@@Z + 0x7b)\n\t 0x6990f502: QtCore4 + 0x10f502 (?sendPostedEvents@QCoreApplicationPrivate@@SAXPEAVQObject@@HPEAVQThreadData@@@Z + 0x2b2)\n\t 0x69932fb8: QtCore4 + 0x132fb8 (?processEvents@QEventDispatcherWin32@@UEAA_NV?$QFlags@W4ProcessEventsFlag@QEventLoop@@@@@Z + 0xb98)\n\t0x7ffaab9782e0: USER32 + 0x182e0 (DispatchMessageW + 0x740)\n\t0x7ffaab977da0: USER32 + 0x17da0 (DispatchMessageW + 0x200)\n\t 0x69932802: QtCore4 + 0x132802 (?processEvents@QEventDispatcherWin32@@UEAA_NV?$QFlags@W4ProcessEventsFlag@QEventLoop@@@@@Z + 0x3e2)\n\t 0x69b70eb4: QtGui4 + 0x80eb4 (?openPopup@QApplicationPrivate@@QEAAXPEAVQWidget@@@Z + 0x204)\n\t 0x6990a88b: QtCore4 + 0x10a88b (?exec@QEventLoop@@QEAAHV?$QFlags@W4ProcessEventsFlag@QEventLoop@@@@@Z + 0x22b)\n\t 0x6990ce6f: QtCore4 + 0x10ce6f (?exec@QCoreApplication@@SAHXZ + 0xdf)\n\t0x7ff618f5197b: quartus + 0x197b (?qgq_main@@YAHHPEAPEBD@Z + 0x7b)\n\t0x7ffa84fb2d68: CCL_MSG + 0x12d68 (?msg_main_thread@@YAPEAXPEAX@Z + 0x18)\n\t0x7ffa84fb454e: CCL_MSG + 0x1454e (?msg_thread_wrapper@@YAPEAXP6APEAXPEAX@Z0@Z + 0x6e)\n\t0x7ffa850d5b00: ccl_mem + 0x15b00 (?mem_thread_wrapper@@YAPEAXP6APEAXPEAX@Z0@Z + 0x70)\n\t0x7ffa84fb2631: CCL_MSG + 0x12631 (?msg_exe_main@@YAHHPEAPEBDP6AHH0@Z@Z + 0xa1)\n\t0x7ff618f524e7: quartus + 0x24e7 (WinMain + 0x127)\n\t0x7ff618f51e58: quartus + 0x1e58 (__tmainCRTStartup + 0x148)\n\t0x7ffaab82257c: KERNEL32 + 0x1257c (BaseThreadInitThunk + 0x1c)\n\t0x7ffaac78af27: ntdll + 0x5af27 (RtlUserThreadStart + 0x27)\n",
+		"subsystem" : "unknown"
+	},
+	"quartus" : {
+		"quartus_bits" : "64",
+		"version" : "17.0.0",
+		"build" : "595",
+		"edition" : "Lite Edition"
+	}
+}

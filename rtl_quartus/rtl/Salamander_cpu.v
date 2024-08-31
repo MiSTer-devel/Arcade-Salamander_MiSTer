@@ -35,6 +35,9 @@ module Salamander_cpu (
 
     input   wire    [10:0]  i_CD,
 
+    output  wire    [7:0]   o_SNDCODE,
+    output  wire            o_SNDINT,
+
     input   wire    [7:0]   i_IN0, i_IN1, i_IN2, i_DIPSW1, i_DIPSW2,
 
     output  wire    [4:0]   o_VIDEO_R,
@@ -263,6 +266,7 @@ assign  iack_vblank_n = syscfg[1][0];
 assign  iack_fparity_n = syscfg[1][1];
 assign  o_VFLIP = syscfg[1][2];
 assign  o_HFLIP = syscfg[1][3];
+assign  o_SNDINT = syscfg[0][3];
 
 
 
@@ -303,7 +307,7 @@ Salamander_PROM #(.AW(16), .DW(8), .simhexfile("rom_18c.txt")) u_progrom_lo (
     .o_DOUT                     (progrom_q[7:0]             ),
     .i_RD                       (progrom_rd                 )
 ); 
- */
+*/
 assign  o_EMU_PROGROM_ADDR = maincpu_addr[16:1];
 assign  progrom_q = i_EMU_PROGROM_DATA;
 assign  o_EMU_PROGROM_RDRQ = progrom_rd;
@@ -333,7 +337,7 @@ Salamander_PROM #(.AW(17), .DW(8), .simhexfile("rom_17c.txt")) u_datarom_lo (
     .o_DOUT                     (datarom_q[7:0]             ),
     .i_RD                       (datarom_rd                 )
 );
- */
+*/
 assign  o_EMU_DATAROM_ADDR = maincpu_addr[17:1];
 assign  datarom_q = i_EMU_DATAROM_DATA;
 assign  o_EMU_DATAROM_RDRQ = datarom_rd;
@@ -402,6 +406,17 @@ assign  o_VIDEO_B = i_BLK ? rgblatch[14:10] : 5'd0;
 assign  o_VIDEO_G = i_BLK ? rgblatch[9:5] : 5'd0;
 assign  o_VIDEO_R = i_BLK ? rgblatch[4:0] : 5'd0;
 
+
+
+///////////////////////////////////////////////////////////
+////// SOUNDLATCH
+////
+
+reg     [7:0]   soundlatch = 8'h00;
+assign  o_SNDCODE = soundlatch;
+always @(posedge mclk) begin
+    if(io0_cs && (maincpu_addr[2:1] == 2'd0) && !maincpu_lds_n) soundlatch <= maincpu_do[7:0];
+end
 
 
 

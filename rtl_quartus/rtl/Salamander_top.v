@@ -1,5 +1,6 @@
 module Salamander_top (
     input   wire            i_EMU_CLK72M,
+    input   wire            i_EMU_CLK57M,
     input   wire            i_EMU_INITRST_n,
     input   wire            i_EMU_SOFTRST_n,
 
@@ -16,7 +17,8 @@ module Salamander_top (
     output  wire    [4:0]   o_VIDEO_B,
 
     //sound
-    output  wire signed      [15:0]  o_SOUND,
+    output  wire signed      [15:0]  o_SND_L,
+    output  wire signed      [15:0]  o_SND_R,
 
     //user inputs
     input   wire    [7:0]   i_IN0, i_IN1, i_IN2, i_DIPSW1, i_DIPSW2,
@@ -42,8 +44,6 @@ module Salamander_top (
     input   wire            i_EMU_PROM_SNDROM_CS,
     input   wire            i_EMU_PROM_VLMROM_CS
 );
-
-assign  o_SOUND = 16'd0;
 
 
 ///////////////////////////////////////////////////////////
@@ -92,6 +92,20 @@ always @(posedge i_EMU_CLK72M) begin
     else if(clk6m_pcen) debug_clk6m <= 1'b1;
 end
 
+//sound clock
+reg     [15:0]  clk3m58_cen_sr = 16'd1;
+always @(posedge i_EMU_CLK57M) begin
+    if(!i_EMU_INITRST_n) begin
+        clk3m58_cen_sr <= 16'd1;
+    end
+    else begin
+        clk3m58_cen_sr[15:1] <= clk3m58_cen_sr[14:0];
+        clk3m58_cen_sr[0] <= clk3m58_cen_sr[15];
+    end
+end
+
+wire            clk3m58_ncen = clk3m58_cen_sr[7];
+wire            clk3m58_pcen = clk3m58_cen_sr[15];
 
 
 ///////////////////////////////////////////////////////////
@@ -107,6 +121,8 @@ wire            gfx_hflip, gfx_vflip;
 wire            gfx_blk;
 wire    [10:0]  gfx_cd;
 wire            gfx_hblank_n, gfx_vblank_n, gfx_vsync_n, gfx_hsync_n;
+wire    [7:0]   snd_code;
+wire            snd_int;
 
 assign  o_VBLANK = ~gfx_vblank_n;
 assign  o_HSYNC = ~gfx_hsync_n;
@@ -159,6 +175,9 @@ Salamander_cpu u_cpuboard (
 
     .i_CD                       (gfx_cd                     ),
 
+    .o_SNDCODE                  (snd_code                   ),
+    .o_SNDINT                   (snd_int                    ),
+
     .i_IN0                      (i_IN0                      ),
     .i_IN1                      (i_IN1                      ),
     .i_IN2                      (i_IN2                      ),
@@ -177,7 +196,6 @@ Salamander_cpu u_cpuboard (
     .i_EMU_PROGROM_DATA         (i_EMU_PROGROM_DATA         ),
     .o_EMU_PROGROM_RDRQ         (o_EMU_PROGROM_RDRQ         )
 );
-
 
 
 
@@ -236,5 +254,35 @@ always @(posedge i_EMU_CLK72M) begin
         else if(hcounter == 9'd277) o_HBLANK <= 1'b0;
     end end
 end
+
+
+
+///////////////////////////////////////////////////////////
+//////  SOUND SECTION
+////
+
+Salamander_sound u_sound (
+    .i_EMU_MCLK                 (i_EMU_CLK57M               ),
+    .i_EMU_CLK3M58_PCEN         (clk3m58_pcen               ),
+    .i_EMU_CLK3M58_NCEN         (clk3m58_ncen               ),
+
+    .i_EMU_INITRST_n            (i_EMU_INITRST_n            ),
+    .i_EMU_SOFTRST_n            (i_EMU_SOFTRST_n            ),
+
+    .i_SNDCODE                  (snd_code                   ),
+    .i_SNDINT                   (snd_int                    ),
+
+    .o_SND_L                    (o_SND_L                    ),
+    .o_SND_R                    (o_SND_R                    ),
+
+    .i_EMU_PROM_CLK             (i_EMU_CLK72M               ),
+    .i_EMU_PROM_ADDR            (i_EMU_PROM_ADDR            ),
+    .i_EMU_PROM_DATA            (i_EMU_PROM_DATA            ),
+    .i_EMU_PROM_WR              (i_EMU_PROM_WR              ),
+    
+    .i_EMU_PROM_SNDROM_CS       (i_EMU_PROM_SNDROM_CS       ),
+    .i_EMU_PROM_VLMROM_CS       (i_EMU_PROM_VLMROM_CS       )
+);
+
 
 endmodule

@@ -1,5 +1,6 @@
 module Salamander_emu (
     input   wire            i_EMU_MCLK,
+    input   wire            i_EMU_SCLK,
     input   wire            i_EMU_INITRST,
     input   wire            i_EMU_SOFTRST,
 
@@ -15,7 +16,8 @@ module Salamander_emu (
     output  wire    [4:0]   o_VIDEO_G,
     output  wire    [4:0]   o_VIDEO_B,
 
-    output  wire signed      [15:0]  o_SOUND,
+    output  wire signed      [15:0]  o_SND_L,
+    output  wire signed      [15:0]  o_SND_R,
 
     input   wire    [15:0]  i_JOYSTICK0,
     input   wire    [15:0]  i_JOYSTICK1,
@@ -59,11 +61,11 @@ module Salamander_emu (
 //0x0008_8000   0x0000_4000   8g           587-d08      27C128        BRAM         VLM5030 commands  
 //0x0008_C000          <-----------------ROM END----------------->
 
-
 //dipsw bank
 reg     [7:0]   DIPSW1 = 8'hFF;
 reg     [7:0]   DIPSW2 = 8'h42;
 reg     [3:0]   DIPSW3 = 4'hF;
+
 
 
 
@@ -77,14 +79,13 @@ reg             rom_download_done = 1'b0;
 //enables
 reg             prog_sdram_en = 1'b0;
 reg             prog_bram_en = 1'b0;
-reg             prog_dipsw_en = 1'b0;
 
 //sdram control
 wire            sdram_init;
 reg             prog_sdram_wr_busy = 1'b0;
 wire            prog_sdram_ack;
-assign          ioctl_wait = sdram_init | prog_sdram_wr_busy;
-//assign          ioctl_wait = 1'b0;
+//assign          ioctl_wait = sdram_init | prog_sdram_wr_busy;
+assign          ioctl_wait = 1'b0;
 
 reg     [1:0]   prog_sdram_bank_sel;
 reg     [21:0]  prog_sdram_addr;
@@ -109,7 +110,6 @@ always @(posedge i_EMU_MCLK) begin
         //enables
         prog_sdram_en <= 1'b0;
         prog_bram_en <= 1'b0;
-        prog_dipsw_en <= 1'b0;
         
         //sdram
         prog_sdram_addr <= 22'h3F_FFFF;
@@ -131,7 +131,6 @@ always @(posedge i_EMU_MCLK) begin
             if(ioctl_addr[19] == 1'b1) begin
                 prog_sdram_en <= 1'b0;
                 prog_bram_en <= 1'b1;
-                prog_dipsw_en <= 1'b0;
 
                 if(ioctl_wr == 1'b1) begin
                     prog_bram_din_buf <= ioctl_data;
@@ -150,7 +149,6 @@ always @(posedge i_EMU_MCLK) begin
             else begin
                 prog_sdram_en <= 1'b1;
                 prog_bram_en <= 1'b0;
-                prog_dipsw_en <= 1'b0;
                 
                 if(prog_sdram_wr_busy == 1'b0) begin
                     if(ioctl_wr == 1'b1) begin
@@ -187,7 +185,6 @@ always @(posedge i_EMU_MCLK) begin
             end
         end
 
-
         else if(ioctl_index == 16'd254) begin //DIP SWITCH
             prog_sdram_en <= 1'b0;
             prog_bram_en <= 1'b0;
@@ -203,7 +200,6 @@ always @(posedge i_EMU_MCLK) begin
         end
     end
 end
-
 
 
 
@@ -380,11 +376,11 @@ jtframe_rom_2slots #(
 wire    [7:0]   IN0, IN1, IN2;
 
 //System control
-assign          IN0[0]  = i_JOYSTICK0[8];
-assign          IN0[1]  = i_JOYSTICK1[8];
-assign          IN0[2]  = i_JOYSTICK0[7];
-assign          IN0[3]  = i_JOYSTICK0[9];
-assign          IN0[4]  = i_JOYSTICK1[9];
+assign          IN0[0]  = i_JOYSTICK0[5]; //p1 coin
+assign          IN0[1]  = i_JOYSTICK1[5]; //p2 coin
+assign          IN0[2]  = i_JOYSTICK0[4]; //service
+assign          IN0[3]  = i_JOYSTICK0[6]; //p1 start
+assign          IN0[4]  = i_JOYSTICK1[6]; //p2 start
 assign          IN0[5]  = DIPSW3[0];
 assign          IN0[6]  = DIPSW3[1];
 assign          IN0[7]  = DIPSW3[2];
@@ -394,9 +390,9 @@ assign          IN1[0]  = i_JOYSTICK0[1];
 assign          IN1[1]  = i_JOYSTICK0[0];
 assign          IN1[2]  = i_JOYSTICK0[3];
 assign          IN1[3]  = i_JOYSTICK0[2];
-assign          IN1[4]  = i_JOYSTICK0[4]; //btn 1
-assign          IN1[5]  = i_JOYSTICK0[5]; //btn 2
-assign          IN1[6]  = 1'b1;
+assign          IN1[4]  = i_JOYSTICK0[7]; //btn 1
+assign          IN1[5]  = i_JOYSTICK0[8]; //btn 2
+assign          IN1[6]  = i_JOYSTICK0[9]; //btn 3
 assign          IN1[7]  = DIPSW3[3];
 
 //Player 2 control
@@ -404,9 +400,9 @@ assign          IN2[0]  = i_JOYSTICK1[1];
 assign          IN2[1]  = i_JOYSTICK1[0];
 assign          IN2[2]  = i_JOYSTICK1[3];
 assign          IN2[3]  = i_JOYSTICK1[2];
-assign          IN2[4]  = i_JOYSTICK1[4]; //btn 1
-assign          IN2[5]  = i_JOYSTICK1[5]; //btn 2
-assign          IN2[6]  = 1'b1;
+assign          IN2[4]  = i_JOYSTICK1[7]; //btn 1
+assign          IN2[5]  = i_JOYSTICK1[8]; //btn 2
+assign          IN2[6]  = i_JOYSTICK0[9]; //btn 3
 assign          IN2[7]  = 1'b1;
 
 
@@ -417,6 +413,7 @@ assign          IN2[7]  = 1'b1;
 
 Salamander_top gameboard_top (
     .i_EMU_CLK72M               (i_EMU_MCLK                 ),
+    .i_EMU_CLK57M               (i_EMU_SCLK                 ),
     .i_EMU_INITRST_n            (~i_EMU_INITRST             ),
     .i_EMU_SOFTRST_n            (~i_EMU_SOFTRST & rom_download_done),
 
@@ -431,7 +428,8 @@ Salamander_top gameboard_top (
     .o_VIDEO_G                  (o_VIDEO_G                  ),
     .o_VIDEO_B                  (o_VIDEO_B                  ),
 
-    .o_SOUND                    (o_SOUND                    ),
+    .o_SND_L                    (o_SND_L                    ),
+    .o_SND_R                    (o_SND_R                    ),
 
     .i_IN0                      (IN0                        ),
     .i_IN1                      (IN1                        ),
@@ -452,12 +450,12 @@ Salamander_top gameboard_top (
     .o_EMU_PCMROM_RDRQ          (                           ),
 
     //PROM programming
-    .i_EMU_PROM_ADDR            (                           ),
-    .i_EMU_PROM_DATA            (                           ),
-    .i_EMU_PROM_WR              (                           ),
+    .i_EMU_PROM_ADDR            (prog_bram_addr             ),
+    .i_EMU_PROM_DATA            (prog_bram_din_buf          ),
+    .i_EMU_PROM_WR              (prog_bram_wr               ),
     
-    .i_EMU_PROM_SNDROM_CS       (                           ),
-    .i_EMU_PROM_VLMROM_CS       (                           )
+    .i_EMU_PROM_SNDROM_CS       (prog_bram_sndrom_cs        ),
+    .i_EMU_PROM_VLMROM_CS       (prog_bram_vlmrom_cs        )
 );
 
 endmodule

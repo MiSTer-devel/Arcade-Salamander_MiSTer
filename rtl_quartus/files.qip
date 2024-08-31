@@ -5,8 +5,12 @@ set_global_assignment -name QIP_FILE rtl/pll.qip
 set_global_assignment -name VERILOG_FILE rtl/Salamander_emu.v
 set_global_assignment -name VERILOG_FILE rtl/Salamander_top.v
 set_global_assignment -name VERILOG_FILE rtl/Salamander_cpu.v
+set_global_assignment -name VERILOG_FILE rtl/Salamander_sound.v
 set_global_assignment -name VERILOG_FILE rtl/Salamander_components/Salamander_PROM.v
 set_global_assignment -name VERILOG_FILE rtl/Salamander_components/Salamander_SRAM.v
 set_global_assignment -name QIP_FILE rtl/GX400_video/GX400_video.qip
 set_global_assignment -name QIP_FILE rtl/ipcores/fx68k/fx68k.qip
+set_global_assignment -name QIP_FILE rtl/ipcores/t80/T80.qip
 set_global_assignment -name QIP_FILE rtl/ipcores/jtframe_sdram/jtframe_sdram64.qip
+set_global_assignment -name QIP_FILE rtl/ipcores/IKAOPM/IKAOPM.qip
+set_global_assignment -name QIP_FILE rtl/ipcores/vlm5030_gl/vlm5030_gl.qip

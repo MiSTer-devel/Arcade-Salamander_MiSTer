@@ -191,7 +191,7 @@ assign BUTTONS = 0;
 //////  PLL
 ////
 
-wire            CLK72M;
+wire            CLK72M, CLK57M;
 wire            pll_locked;
 
 pll pll(
@@ -199,6 +199,7 @@ pll pll(
     .rst                        (RESET                      ),
     .outclk_0                   (CLK72M                     ),
     .outclk_1                   (SDRAM_CLK                  ),
+	 .outclk_2                   (CLK57M                     ),
     .locked                     (pll_locked                 )
 );
 
@@ -297,18 +298,16 @@ wire            hblank, vblank;
 wire    [4:0]   video_r, video_g, video_b; //need to use color conversion LUT
 wire            vcen;
 
-wire    [15:0]  sound;
 wire            master_reset = RESET | status[0] | buttons[1];
 
 wire            flip = status[23];
 
-assign          AUDIO_L = 16'h0;
-assign          AUDIO_R = 16'h0;
 assign          AUDIO_S = 1'b1;
 assign          AUDIO_MIX = 2'd0;
 
 Salamander_emu gameboard_top (
     .i_EMU_MCLK                 (CLK72M                     ),
+	 .i_EMU_SCLK                 (CLK57M                     ),
     .i_EMU_INITRST              (RESET                      ),
     .i_EMU_SOFTRST              (master_reset               ),
 
@@ -323,7 +322,8 @@ Salamander_emu gameboard_top (
     .o_VIDEO_G                  (video_g                    ),
     .o_VIDEO_B                  (video_b                    ),
 
-    .o_SOUND                    (sound                      ),
+    .o_SND_L                    (AUDIO_L                    ),
+    .o_SND_R                    (AUDIO_R                    ),
 
     .i_JOYSTICK0                (joystick_0                 ),
     .i_JOYSTICK1                (joystick_1                 ),
