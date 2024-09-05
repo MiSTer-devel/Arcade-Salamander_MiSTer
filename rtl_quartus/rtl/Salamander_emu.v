@@ -238,7 +238,7 @@ jtframe_sdram64 #(.HF(0)) sdram_controller (
     .ba1_addr                   (ba1_addr                   ),
     .ba2_addr                   (22'h00_0000                ),
     .ba3_addr                   (22'h00_0000                ),
-    .rd                         ({3'b000, rd[0]}           ),
+    .rd                         ({2'b00, rd[1:0]}           ),
     .wr                         (4'b0000                    ),
     .din                        (prog_sdram_din_buf         ),
     .din_m                      (2'b00                      ),
@@ -290,12 +290,12 @@ wire    [15:0]  datarom_q;
 wire            datarom_rdrq;
 
 jtframe_rom_2slots #(
-    // Slot 0: Sound program
+    // Slot 0: Data ROM
     .SLOT0_AW                   (17                         ),
     .SLOT0_DW                   (16                         ),
     .SLOT0_OFFSET               (22'h00_0000                ),
 
-    // Slot 1: Main program
+    // Slot 1: Program ROM
     .SLOT1_AW                   (16                         ),
     .SLOT1_DW                   (16                         ),
     .SLOT1_OFFSET               (22'h02_0000                )
@@ -320,6 +320,45 @@ jtframe_rom_2slots #(
     .sdram_ack                  (ack[0]                     ),
     .data_dst                   (dst[0]                     ),
     .data_rdy                   (rdy[0]                     ),
+    .data_read                  (data_read                  )
+);
+
+
+wire    [16:0]  pcmrom_addr;
+wire    [15:0]  pcmrom_q;
+wire            pcmrom_rdrq;
+
+jtframe_rom_2slots #(
+    // Slot 0: PCM ROM
+    .SLOT0_AW                   (16                         ),
+    .SLOT0_DW                   (16                         ),
+    .SLOT0_OFFSET               (22'h00_0000                ),
+
+    // Slot 1: reserved
+    .SLOT1_AW                   (16                         ),
+    .SLOT1_DW                   (16                         ),
+    .SLOT1_OFFSET               (22'h01_0000                )
+) bank1 (
+    .rst                        (~rom_download_done         ),
+    .clk                        (i_EMU_MCLK                 ),
+
+    .slot0_cs                   (pcmrom_rdrq                ),
+    .slot1_cs                   (1'b0                       ),
+
+    .slot0_ok                   (                           ),
+    .slot1_ok                   (                           ),
+
+    .slot0_addr                 (pcmrom_addr[16:1]          ),
+    .slot1_addr                 (16'h0                      ),
+
+    .slot0_dout                 (pcmrom_q                   ),
+    .slot1_dout                 (                           ),
+
+    .sdram_addr                 (ba1_addr                   ),
+    .sdram_req                  (rd[1]                      ),
+    .sdram_ack                  (ack[1]                     ),
+    .data_dst                   (dst[1]                     ),
+    .data_rdy                   (rdy[1]                     ),
     .data_read                  (data_read                  )
 );
 
@@ -445,9 +484,9 @@ Salamander_top gameboard_top (
     .i_EMU_PROGROM_DATA         (progrom_q                  ),
     .o_EMU_PROGROM_RDRQ         (progrom_rdrq               ),
 
-    .o_EMU_PCMROM_ADDR          (                           ),
-    .i_EMU_PCMROM_DATA          (                           ),
-    .o_EMU_PCMROM_RDRQ          (                           ),
+    .o_EMU_PCMROM_ADDR          (pcmrom_addr                ),
+    .i_EMU_PCMROM_DATA          (pcmrom_addr[0] ? pcmrom_q[15:8] : pcmrom_q[7:0]),
+    .o_EMU_PCMROM_RDRQ          (pcmrom_rdrq                ),
 
     //PROM programming
     .i_EMU_PROM_ADDR            (prog_bram_addr             ),

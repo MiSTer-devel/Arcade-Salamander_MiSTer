@@ -11,6 +11,10 @@ module Salamander_sound (
 
     output  reg signed      [15:0]  o_SND_R, o_SND_L,
 
+    output  wire    [16:0]  o_EMU_PCMROM_ADDR,
+    input   wire    [7:0]   i_EMU_PCMROM_DATA,
+    output  wire            o_EMU_PCMROM_RDRQ,
+
     input   wire            i_EMU_PROM_CLK,
     input   wire    [15:0]  i_EMU_PROM_ADDR,
     input   wire    [7:0]   i_EMU_PROM_DATA,
@@ -269,28 +273,84 @@ wire    [16:0]  pcmrom_addr;
 wire    [6:0]   pcm_snd_a, pcm_snd_b;
 
 //PCM volume register
-wire            pcm_vol_wr;
+wire            pcm_vol_wr_n;
 reg     [7:0]   pcm_vol;
 
+K007232 u_pcm (
+    .i_EMUCLK                   (i_EMU_MCLK                 ),
+    .i_PCEN                     (clk3m58_pcen               ), 
+    .i_NCEN                     (clk3m58_ncen               ),
+    .i_RST_n                    (~sndcpu_rst                ),
+
+    .i_RCS_n                    (1'b1                       ),
+    .i_DACS_n                   (~pcm_cs                    ),
+    .i_RD_n                     (1'b1                       ),
+    
+    .i_AB                       ({sndcpu_addr[3:1], ~sndcpu_addr[0]}),
+    .i_DB                       (sndcpu_do                  ),
+    .o_DB                       (                           ),
+    .o_DB_OE                    (                           ),
+
+    .o_SLEV_n                   (pcm_vol_wr_n               ),
+    .o_Q_n                      (                           ),
+    .o_E_n                      (                           ),
+
+    .i_RAM                      (pcmrom_q                   ),
+    .o_RAM                      (                           ),
+    .o_RAM_OE                   (                           ),
+    .o_SA                       (pcmrom_addr                ),
+
+    .o_ASD                      (pcm_snd_a                  ),
+    .o_BSD                      (pcm_snd_b                  ),
+
+    .o_CK2M                     (                           )
+);
+
+//volume latch
+always @(posedge i_EMU_MCLK) begin
+    if(!pcm_vol_wr_n) pcm_vol <= sndcpu_do;
+end
+
+//SDRAM interface - CDC!!!!!
+
+reg     [16:0]  pcmrom_addr_z, pcmrom_addr_zz;
+reg             pcmrom_rdrq, pcmrom_rdrq_z;
+always @(posedge i_EMU_MCLK) begin
+    pcmrom_addr_z <= pcmrom_addr;
+    pcmrom_addr_zz <= pcmrom_addr_z;
+end
+always @(posedge i_EMU_PROM_CLK) begin
+    pcmrom_rdrq <= pcmrom_addr_zz != pcmrom_addr_z;
+    pcmrom_rdrq_z <= pcmrom_rdrq;
+end
+
+assign  o_EMU_PCMROM_ADDR = pcmrom_addr;
+assign  o_EMU_PCMROM_RDRQ = pcmrom_rdrq_z;
+assign  pcmrom_q = i_EMU_PCMROM_DATA;
+
+//PROM
 /*
-k007232 u_pcm(
-	.CLK                        (i_EMU_MCLK                 ),
-	.clk_en_p                   (clk3m58_pcen               ),
-	.clk_en_n                   (clk3m58_ncen               ),
-	.NRES                       (~sndcpu_rst                ),
-	
-	.NRCS                       (1'b1                       ),
-	.DACS                       (pcm_cs                     ),
-	.NRD                        (1'b1                       ),
-	
-	.AB                         ({sndcpu_addr[3:1], ~sndcpu_addr[0]}),
-	.DB                         (sndcpu_do                  ),
-	.RAM_IN                     (pcmrom_q                   ),
-	.SA                         (pcmrom_addr                ),
-	.ASD                        (pcm_snd_a                  ),
-	.BSD                        (pcm_snd_b                  ),
-	.SLEV                       (pcm_vol_wr                 )
-);*/
+Salamander_PROM_DC #(.AW(17), .DW(8), .simhexfile("rom_10a.txt")) u_pcmrom (
+    .i_PROG_CLK                 (i_EMU_PROM_CLK             ),
+    .i_PROG_ADDR                (17'h0                      ),
+    .i_PROG_DIN                 (i_EMU_PROM_DATA            ),
+    .i_PROG_CS                  (1'b0                       ),
+    .i_PROG_WR                  (1'b0                       ),
+
+    .i_MCLK                     (i_EMU_MCLK                 ),
+    .i_ADDR                     (pcmrom_addr                ),
+    .o_DOUT                     (pcmrom_q                   ),
+    .i_RD                       (1'b1                       )
+);
+*/
+
+wire signed [15:0]  pcm_a_signed = {9'd0, pcm_snd_a} - 16'sd64;
+wire signed [15:0]  pcm_b_signed = {9'd0, pcm_snd_b} - 16'sd64;
+
+reg signed [15:0]  pcm_mixed;
+always @(posedge mclk) begin
+    pcm_mixed <= pcm_a_signed * $signed({1'b0, pcm_vol[7:4]}) + pcm_b_signed * $signed({1'b0, pcm_vol[3:0]});
+end
 
 
 
@@ -299,8 +359,8 @@ k007232 u_pcm(
 ////
 
 always @(posedge mclk) begin
-    o_SND_R <= ymfm_r + (vlm_snd * 6'sd45);
-    o_SND_L <= ymfm_l + (vlm_snd * 6'sd45);
+    o_SND_R <= ymfm_r + (vlm_snd * 6'sd45) + (pcm_mixed * 6'sd2);
+    o_SND_L <= ymfm_l + (vlm_snd * 6'sd45) + (pcm_mixed * 6'sd2);
 end
 
 

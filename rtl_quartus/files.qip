@@ -14,3 +14,4 @@ set_global_assignment -name QIP_FILE rtl/ipcores/t80/T80.qip
 set_global_assignment -name QIP_FILE rtl/ipcores/jtframe_sdram/jtframe_sdram64.qip
 set_global_assignment -name QIP_FILE rtl/ipcores/IKAOPM/IKAOPM.qip
 set_global_assignment -name QIP_FILE rtl/ipcores/vlm5030_gl/vlm5030_gl.qip
+set_global_assignment -name VERILOG_FILE rtl/ipcores/K007232.v

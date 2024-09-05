@@ -275,6 +275,10 @@ Salamander_sound u_sound (
     .o_SND_L                    (o_SND_L                    ),
     .o_SND_R                    (o_SND_R                    ),
 
+    .o_EMU_PCMROM_ADDR          (o_EMU_PCMROM_ADDR          ),
+    .i_EMU_PCMROM_DATA          (i_EMU_PCMROM_DATA          ),
+    .o_EMU_PCMROM_RDRQ          (o_EMU_PCMROM_RDRQ          ),
+
     .i_EMU_PROM_CLK             (i_EMU_CLK72M               ),
     .i_EMU_PROM_ADDR            (i_EMU_PROM_ADDR            ),
     .i_EMU_PROM_DATA            (i_EMU_PROM_DATA            ),
