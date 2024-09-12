@@ -93,7 +93,7 @@ wire            DMA_n = ~&{ABS_128V, ABS_64V, ABS_32V, ~ABS_16V}; //vcounter 480
 assign  o_ABS_1H_n = ABS_n1H;
 assign  o_ABS_2H = ABS_2H;
 
-
+/*
 K005292 u_K005292 (
     .i_EMU_MCLK                 (mclk                       ),
     .i_EMU_CLK6MPCEN_n          (~clk6m_pcen                ),
@@ -150,6 +150,47 @@ K005292 u_K005292 (
     
     .o_VSYNC_n                  (o_VSYNC_n                  ),
     .o_HSYNC_n                  (o_HSYNC_n                  ),
+
+    .o_DEBUG_HCNTR              (o_DEBUG_HCNTR              ),
+    .o_DEBUG_VCNTR              (o_DEBUG_VCNTR              )
+);
+*/
+
+
+K005292 u_dut (
+    .i_EMU_MCLK                 (mclk                       ),
+    .i_EMU_CLK6MPCEN_n          (~clk6m_pcen                ),
+
+    .i_MRST_n                   (i_MRST_n                   ),
+
+    .i_HFLIP                    (i_HFLIP                    ),
+    .i_VFLIP                    (i_VFLIP                    ),
+    .i_H288                     (1'b0                       ),
+    .i_INTER                    (1'b0                       ),
+
+    .o_HBLANK_n                 (HBLANK_n                   ),
+    .o_VBLANK_n                 (VBLANK_n                   ),
+    .o_VBLANKH_n                (VBLANKH_n                  ),  //VBLANK**
+
+    .o_ABS_H                    ({ABS_256H,   
+                                  ABS_128H,   ABS_64H,    ABS_32H,    ABS_16H,
+                                  ABS_8H,     ABS_4H,     ABS_2H,     ABS_1H}),
+    .o_ABS_V                    ({ABS_128V,   ABS_64V,    ABS_32V,    ABS_16V,
+                                  ABS_8V,     ABS_4V,     ABS_2V,     ABS_1V}),
+    .o_FLIP_H                   ({FLIP_128H,  FLIP_64H,   FLIP_32H,   FLIP_16H,
+                                  FLIP_8H,    FLIP_4H,    FLIP_2H,    FLIP_1H}),
+    .o_FLIP_V                   ({FLIP_128V,  FLIP_64V,   FLIP_32V,   FLIP_16V,
+                                  FLIP_8V,    FLIP_4V,    FLIP_2V,    FLIP_1V}),
+
+    .o_VCLK                     (VCLK                       ),
+
+    .o_FRAMEPARITY              (o_FRAMEPARITY              ),
+
+    .o_VSYNC_n                  (o_VSYNC_n                  ),
+    .o_HSYNC_n                  (o_HSYNC_n                  ),
+    .o_CSYNC_n                  (                           ),
+
+    .i_TEST                     (5'b10010                   ),
 
     .o_DEBUG_HCNTR              (o_DEBUG_HCNTR              ),
     .o_DEBUG_VCNTR              (o_DEBUG_VCNTR              )
