@@ -1,7 +1,7 @@
 <misterromdescription>
     <name>Salamander (version J)</name>
     <mameversion>0266</mameversion>
-    <setname>salamand</setname>
+    <setname>salamandj</setname>
     <mratimestamp>20240817</mratimestamp>
     <year>1986</year>
     <manufacturer>Konami</manufacturer>
@@ -9,7 +9,7 @@
     <rbf>Salamander</rbf>
     <about author="Raki" twitter="@RCAVictorCo"></about>
     <resolution>15kHz</resolution>
-    <rotation>Horizontal</rotation>
+    <rotation>horizontal</rotation>
     <players>1</players>
     <joystick>8-way</joystick>
     <special_controls></special_controls>
