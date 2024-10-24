@@ -30,7 +30,7 @@
         <dip bits="19"          name="Cabinet type" ids="upright,cocktail"/>
     </switches>
 
-    <rom index='0' md5="None" type='nonmerged' zip='lifefrce.zip'>
+    <rom index='0' md5="None" type='nonmerged' zip='salamand.zip|lifefrce.zip'>
         <!-- graphic data hi    0x000000-0x01ffff -->
         <part crc="e5caf6e6" name="6107.17b"/>
         <!-- graphic data lo    0x020000-0x03ffff -->
