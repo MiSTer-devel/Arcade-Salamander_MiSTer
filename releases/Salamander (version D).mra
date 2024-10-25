@@ -9,7 +9,7 @@
     <rbf>Salamander</rbf>
     <about author="Raki" twitter="@RCAVictorCo"></about>
     <resolution>15kHz</resolution>
-    <rotation>Horizontal</rotation>
+    <rotation>horizontal</rotation>
     <players>1</players>
     <joystick>8-way</joystick>
     <special_controls></special_controls>
@@ -30,7 +30,7 @@
         <dip bits="19"          name="Cabinet type" ids="upright,cocktail"/>
     </switches>
 
-    <rom index='0' md5="None" type='nonmerged' zip='salamand.zip'>
+    <rom index='0' md5="None" type='merged' zip='salamand.zip'>
         <!-- graphic data hi    0x000000-0x01ffff -->
         <part crc="e5caf6e6" name="587-c03.17b"/>
         <!-- graphic data lo    0x020000-0x03ffff -->

@@ -1,7 +1,7 @@
 <misterromdescription>
     <name>Lifeforce (Japan)</name>
     <mameversion>0266</mameversion>
-    <setname>salamand</setname>
+    <setname>lifefrcej</setname>
     <mratimestamp>20240817</mratimestamp>
     <year>1986</year>
     <manufacturer>Konami</manufacturer>
@@ -9,7 +9,7 @@
     <rbf>Salamander</rbf>
     <about author="Raki" twitter="@RCAVictorCo"></about>
     <resolution>15kHz</resolution>
-    <rotation>Horizontal</rotation>
+    <rotation>horizontal</rotation>
     <players>1</players>
     <joystick>8-way</joystick>
     <special_controls></special_controls>
@@ -30,7 +30,7 @@
         <dip bits="19"          name="Cabinet type" ids="upright,cocktail"/>
     </switches>
 
-    <rom index='0' md5="None" type='nonmerged' zip='lifefrcej.zip'>
+    <rom index='0' md5="None" type='nonmerged' zip='salamand.zip|lifefrcej.zip'>
         <!-- graphic data hi    0x000000-0x01ffff -->
         <part crc="9041f850" name="587-n03.17b"/>
         <!-- graphic data lo    0x020000-0x03ffff -->
