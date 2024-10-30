@@ -307,7 +307,7 @@ assign          AUDIO_MIX = 2'd0;
 
 Salamander_emu gameboard_top (
     .i_EMU_MCLK                 (CLK72M                     ),
-	 .i_EMU_SCLK                 (CLK57M                     ),
+	.i_EMU_SCLK                 (CLK57M                     ),
     .i_EMU_INITRST              (RESET                      ),
     .i_EMU_SOFTRST              (master_reset               ),
 

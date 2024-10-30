@@ -306,26 +306,47 @@ K007232 u_pcm (
     .o_CK2M                     (                           )
 );
 
+/*
+F007232 u_pcm(
+    .CLK                        (i_EMU_MCLK                 ),
+    .clk_en_p                   (clk3m58_pcen               ),
+    .clk_en_n                   (clk3m58_ncen               ),
+    .NRES                       (~sndcpu_rst                ),
+    
+    .NRCS                       (1'b1                       ),
+    .DACS                       (~pcm_cs                    ),
+    .NRD                        (1'b1                       ),
+    
+    .AB                         ({sndcpu_addr[3:1], ~sndcpu_addr[0]}),
+    .DB                         (sndcpu_do                  ),
+
+    .RAM_IN                     (pcmrom_q                   ),
+    .SA                         (pcmrom_addr                ),
+    .ASD                        (pcm_snd_a                  ),
+    .BSD                        (pcm_snd_b                  ),
+    .SLEV                       (pcm_vol_wr_n               )
+);*/
+
+
 //volume latch
 always @(posedge i_EMU_MCLK) begin
     if(!pcm_vol_wr_n) pcm_vol <= sndcpu_do;
 end
 
 //SDRAM interface - CDC!!!!!
-
-reg     [16:0]  pcmrom_addr_z, pcmrom_addr_zz;
-reg             pcmrom_rdrq, pcmrom_rdrq_z;
+reg     [16:0]  pcmrom_addr_z;
+reg             pcmrom_rdrq, pcmrom_rdrq_z, pcmrom_rdrq_zz, pcmrom_rdrq_zzz;
 always @(posedge i_EMU_MCLK) begin
     pcmrom_addr_z <= pcmrom_addr;
-    pcmrom_addr_zz <= pcmrom_addr_z;
 end
 always @(posedge i_EMU_PROM_CLK) begin
-    pcmrom_rdrq <= pcmrom_addr_zz != pcmrom_addr_z;
+    pcmrom_rdrq <= pcmrom_addr_z != pcmrom_addr;
     pcmrom_rdrq_z <= pcmrom_rdrq;
+    pcmrom_rdrq_zz <= pcmrom_rdrq_z;
 end
 
 assign  o_EMU_PCMROM_ADDR = pcmrom_addr;
-assign  o_EMU_PCMROM_RDRQ = pcmrom_rdrq_z;
+assign  o_EMU_PCMROM_RDRQ = pcmrom_rdrq_z && !pcmrom_rdrq_zz; //posedge
 assign  pcmrom_q = i_EMU_PCMROM_DATA;
 
 //PROM
@@ -344,12 +365,12 @@ Salamander_PROM_DC #(.AW(17), .DW(8), .simhexfile("rom_10a.txt")) u_pcmrom (
 );
 */
 
-wire signed [15:0]  pcm_a_signed = {9'd0, pcm_snd_a} - 16'sd64;
-wire signed [15:0]  pcm_b_signed = {9'd0, pcm_snd_b} - 16'sd64;
+wire signed [15:0]  pcm_a_signed = $signed({9'd0, pcm_snd_a}) - 16'sd64;
+wire signed [15:0]  pcm_b_signed = $signed({9'd0, pcm_snd_b}) - 16'sd64;
 
 reg signed [15:0]  pcm_mixed;
 always @(posedge mclk) begin
-    pcm_mixed <= pcm_a_signed * $signed({1'b0, pcm_vol[7:4]}) + pcm_b_signed * $signed({1'b0, pcm_vol[3:0]});
+    pcm_mixed <= (pcm_a_signed * $signed({1'b0, pcm_vol[7:4]})) + (pcm_b_signed * $signed({1'b0, pcm_vol[3:0]}));
 end
 
 

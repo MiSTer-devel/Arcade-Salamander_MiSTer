@@ -64,7 +64,7 @@ module Salamander_emu (
 //dipsw bank
 reg     [7:0]   DIPSW1 = 8'hFF;
 reg     [7:0]   DIPSW2 = 8'h42;
-reg     [3:0]   DIPSW3 = 4'hF;
+reg     [4:0]   DIPSW3 = 5'h1F; //use bit[4] internally
 
 
 
@@ -123,6 +123,14 @@ always @(posedge i_EMU_MCLK) begin
         prog_bram_addr <= 16'hFFFF;
         prog_bram_wr <= 1'b0;
         prog_bram_csreg <= 2'b00;
+
+        if(ioctl_index == 16'd254) begin //DIP SWITCH
+            if(ioctl_wr == 1'b1) begin
+                     if(ioctl_addr[2:0] == 3'd0) DIPSW1 <= ioctl_data;
+                else if(ioctl_addr[2:0] == 3'd1) DIPSW2 <= ioctl_data;
+                else if(ioctl_addr[2:0] == 3'd2) DIPSW3 <= ioctl_data[4:0];
+            end
+        end
     end
     else begin
         //  ROM DATA UPLOAD
@@ -188,15 +196,7 @@ always @(posedge i_EMU_MCLK) begin
         else if(ioctl_index == 16'd254) begin //DIP SWITCH
             prog_sdram_en <= 1'b0;
             prog_bram_en <= 1'b0;
-
-            if(ioctl_wr == 1'b1) begin
-                     if(ioctl_addr[2:0] == 3'd0) DIPSW1 <= ioctl_data;
-                else if(ioctl_addr[2:0] == 3'd1) DIPSW2 <= ioctl_data;
-                else if(ioctl_addr[2:0] == 3'd2) begin
-                    DIPSW3 <= ioctl_data[3:0];
-                    rom_download_done <= 1'b1;
-                end
-            end
+            rom_download_done <= 1'b1;
         end
     end
 end
@@ -390,26 +390,38 @@ jtframe_rom_2slots #(
         ^--------- Demo sound       /1=off 0=on
 
     DIPSW3
-            3210
-            || |
-            || ^-- Flip             /1=normal 0=flip
-            |^---- Test mode        /1=normal 0=service
-            ^----- Cabinet          /1=upright 0=cocktail
+           43210
+           ||| |
+           ||| ^-- Flip             /1=normal 0=flip
+           ||^---- Test mode        /1=normal 0=service
+           |^----- Cabinet          /1=upright 0=cocktail
+           ^------ Input counts     /1=2-button 0=3-button
 */
 
 /*
+    <buttons default="Select,R,L,A,B,X" names="Service,Coin,Start,Shoot,Missile,Power-up"></buttons>
+
     MiSTer joystick(SNES)
     bit   
     0   right
     1   left
     2   down
     3   up
-    4   attack(A)
-    5   bomb(B)
-    6   test(START)
-    7   service(SELECT)
-    8   coin(R)
-    9   start(L)
+    4   service(SELECT)
+    5   coin(R)
+    6   start(L)
+    7   shoot(A)
+    8   missile(B)
+    9   power-up(X)
+
+    salamander
+    btn1 - shoot
+    btn2 - missile
+
+    lifefrcej
+    btn1 - power-up
+    btn2 - shoot
+    btn3 - missile
 */
 
 wire    [7:0]   IN0, IN1, IN2;
@@ -429,9 +441,9 @@ assign          IN1[0]  = i_JOYSTICK0[1];
 assign          IN1[1]  = i_JOYSTICK0[0];
 assign          IN1[2]  = i_JOYSTICK0[3];
 assign          IN1[3]  = i_JOYSTICK0[2];
-assign          IN1[4]  = i_JOYSTICK0[7]; //btn 1
-assign          IN1[5]  = i_JOYSTICK0[8]; //btn 2
-assign          IN1[6]  = i_JOYSTICK0[9]; //btn 3
+assign          IN1[4]  = DIPSW3[4] ? i_JOYSTICK0[7] : i_JOYSTICK0[9]; //btn 1
+assign          IN1[5]  = DIPSW3[4] ? i_JOYSTICK0[8] : i_JOYSTICK0[7]; //btn 2
+assign          IN1[6]  = DIPSW3[4] ? 1'b0           : i_JOYSTICK0[8]; //btn 3
 assign          IN1[7]  = DIPSW3[3];
 
 //Player 2 control
@@ -439,10 +451,10 @@ assign          IN2[0]  = i_JOYSTICK1[1];
 assign          IN2[1]  = i_JOYSTICK1[0];
 assign          IN2[2]  = i_JOYSTICK1[3];
 assign          IN2[3]  = i_JOYSTICK1[2];
-assign          IN2[4]  = i_JOYSTICK1[7]; //btn 1
-assign          IN2[5]  = i_JOYSTICK1[8]; //btn 2
-assign          IN2[6]  = i_JOYSTICK0[9]; //btn 3
-assign          IN2[7]  = 1'b1;
+assign          IN2[4]  = DIPSW3[4] ? i_JOYSTICK1[7] : i_JOYSTICK1[9]; //btn 1
+assign          IN2[5]  = DIPSW3[4] ? i_JOYSTICK1[8] : i_JOYSTICK1[7]; //btn 2
+assign          IN2[6]  = DIPSW3[4] ? 1'b0           : i_JOYSTICK1[8]; //btn 3
+assign          IN2[7]  = 1'b0;
 
 
 
