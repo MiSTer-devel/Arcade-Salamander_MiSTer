@@ -2,7 +2,7 @@
     <name>Lifeforce (US)</name>
     <mameversion>0266</mameversion>
     <setname>lifefrce</setname>
-    <mratimestamp>20240817</mratimestamp>
+    <mratimestamp>20241030</mratimestamp>
     <year>1986</year>
     <manufacturer>Konami</manufacturer>
     <category>Shmup</category>
@@ -51,5 +51,5 @@
         <part crc="7f0e9b41" name="587-k08.8g"/>
     </rom>
 
-    <buttons default="Select,R,L,A,B" names="Service,Coin,Start,Shoot,Missile"></buttons>
+    <buttons default="Select,R,Start,A,B" names="Service,Coin,Start,Shoot,Missile"></buttons>
 </misterromdescription>
