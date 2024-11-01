@@ -274,7 +274,7 @@ wire    [6:0]   pcm_snd_a, pcm_snd_b;
 
 //PCM volume register
 wire            pcm_vol_wr_n;
-reg     [7:0]   pcm_vol;
+reg     [7:0]   pcm_vol = 8'hFF;
 
 K007232 u_pcm (
     .i_EMUCLK                   (i_EMU_MCLK                 ),
@@ -283,7 +283,7 @@ K007232 u_pcm (
     .i_RST_n                    (~sndcpu_rst                ),
 
     .i_RCS_n                    (1'b1                       ),
-    .i_DACS_n                   (~pcm_cs                    ),
+    .i_DACS_n                   (~pcm_cs),// | sndcpu_wr_n      ),
     .i_RD_n                     (1'b1                       ),
     
     .i_AB                       ({sndcpu_addr[3:1], ~sndcpu_addr[0]}),
@@ -365,12 +365,19 @@ Salamander_PROM_DC #(.AW(17), .DW(8), .simhexfile("rom_10a.txt")) u_pcmrom (
 );
 */
 
-wire signed [15:0]  pcm_a_signed = $signed({9'd0, pcm_snd_a}) - 16'sd64;
-wire signed [15:0]  pcm_b_signed = $signed({9'd0, pcm_snd_b}) - 16'sd64;
+//wire signed [15:0]  pcm_a_signed = $signed({9'd0, pcm_snd_a}) - 16'sd64;
+//wire signed [15:0]  pcm_b_signed = $signed({9'd0, pcm_snd_b}) - 16'sd64;
 
-reg signed [15:0]  pcm_mixed;
-always @(posedge mclk) begin
-    pcm_mixed <= (pcm_a_signed * $signed({1'b0, pcm_vol[7:4]})) + (pcm_b_signed * $signed({1'b0, pcm_vol[3:0]}));
+reg signed  [13:0]  pcm_a_signed, pcm_a_signed_z, pcm_a_signed_zz;
+reg signed  [13:0]  pcm_b_signed;
+reg signed  [15:0]  pcm_mixed;
+always @(posedge mclk) if(clk3m58_pcen) begin
+    pcm_a_signed <= ($signed({1'b0, pcm_snd_a}) - 8'sd64) * $signed({1'b0, pcm_vol[7:4]});
+    //pcm_a_signed_z <= pcm_a_signed;
+    //pcm_a_signed_zz <= pcm_a_signed_z;
+    pcm_b_signed <= ($signed({1'b0, pcm_snd_b}) - 8'sd64) * $signed({1'b0, pcm_vol[3:0]});
+
+    pcm_mixed <= pcm_a_signed + pcm_b_signed;
 end
 
 

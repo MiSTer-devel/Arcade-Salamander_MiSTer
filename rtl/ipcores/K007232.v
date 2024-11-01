@@ -159,7 +159,7 @@ reg     [5:0]   reg0, reg6;
 reg     [7:0]   reg1, reg2, reg3, reg7, reg8, reg9;
 reg             reg5, reg11;
 reg     [1:0]   reg12;
-always @(posedge mclk) begin
+always @(*) begin
     if(reg0_wr) reg0 <= i_DB[5:0];
     if(reg1_wr) reg1 <= i_DB;
     if(reg2_wr) reg2 <= i_DB;
