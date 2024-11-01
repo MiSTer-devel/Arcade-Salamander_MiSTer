@@ -283,7 +283,7 @@ K007232 u_pcm (
     .i_RST_n                    (~sndcpu_rst                ),
 
     .i_RCS_n                    (1'b1                       ),
-    .i_DACS_n                   (~pcm_cs),// | sndcpu_wr_n      ),
+    .i_DACS_n                   (~pcm_cs | (sndcpu_wr_n & sndcpu_rd_n)),
     .i_RD_n                     (1'b1                       ),
     
     .i_AB                       ({sndcpu_addr[3:1], ~sndcpu_addr[0]}),
