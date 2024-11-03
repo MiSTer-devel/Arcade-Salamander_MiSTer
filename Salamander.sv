@@ -220,7 +220,7 @@ wire    [127:0] status; //status bits
 
 `include "build_id.v" 
 localparam CONF_STR = {
-    "ikacore_SuprLoco;",
+    "Salamander;",
     "-;",
     "P1,Scaler Settings;",
     "P1-;",
