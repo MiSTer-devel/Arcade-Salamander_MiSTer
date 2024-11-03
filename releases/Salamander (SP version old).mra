@@ -2,7 +2,7 @@
     <name>Salamander (SP version old)</name>
     <mameversion>0000</mameversion>
     <setname>spclone</setname>
-    <mratimestamp>20241030</mratimestamp>
+    <mratimestamp>20241103</mratimestamp>
     <year>1986</year>
     <manufacturer>Konami</manufacturer>
     <category>Shmup</category>
@@ -15,13 +15,14 @@
     <special_controls></special_controls>
     <num_buttons>3</num_buttons>
     
-    <switches default="FF,42,0F">
+    <switches default="FF,5B,0F">
         <!-- DSW1 -->
-        <dip bits="0,3"         name="Coinage"      ids="Disabled,4C3P,4C1P,3C4P,3C2P,3C1P,2C5P,2C3P,2C1P,1C7P,1C6P,1C5P,1C4P,1C3P,1C2P,1C1P"/>
+        <dip bits="0,3"         name="Coinage A"    ids="Disabled,4C3P,4C1P,3C4P,3C2P,3C1P,2C5P,2C3P,2C1P,1C7P,1C6P,1C5P,1C4P,1C3P,1C2P,1C1P"/>
+        <dip bits="4,7"         name="Coinage B"    ids="Disabled,4C3P,4C1P,3C4P,3C2P,3C1P,2C5P,2C3P,2C1P,1C7P,1C6P,1C5P,1C4P,1C3P,1C2P,1C1P"/>
         <!-- DSW2 -->
-        <dip bits="8,9"         name="Lives"        ids="7,5,3,2"/>
+        <dip bits="8,9"         name="Lives"        ids="6,5,4,3"/>
         <dip bits="10"          name="Coin slots"   ids="2,1"/>
-        <dip bits="11,12"       name="Max credits"  ids="9,5,3,1"/>
+        <dip bits="11,12"       name="Bonus life"   ids="100k only,70k only,100k->300k,70k->200k"/>
         <dip bits="13,14"       name="Difficulty"   ids="hardest,hard,normal,easy"/>
         <dip bits="15"          name="Demo sound"   ids="on,off"/>
         <!-- DSW3 -->

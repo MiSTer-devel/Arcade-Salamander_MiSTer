@@ -48,15 +48,15 @@ module Salamander_emu (
 
 
 ///////////////////////////////////////////////////////////
-//////  ROM DISTRUBUTOR
+//////  ROM DISTRIBUTOR
 ////
 
 //start addr    length        comp num     mame rom     parts num     location     description
-//0x0000_0000   0x0002_0000   17b          587-c03      TC531000      BANK0        graphic data(lo, mask=10)
-//0x0002_0000   0x0002_0000   17c          587-c06      TC531000      BANK0        graphic data(hi, mask=01)
+//0x0000_0000   0x0002_0000   17b          587-c03      TC531000      BANK0        graphic data(hi, mask=01)
+//0x0002_0000   0x0002_0000   17c          587-c06      TC531000      BANK0        graphic data(lo, mask=10)
 //0x0004_0000   0x0002_0000   10a          587-c01      TC531000      BANK1        PCM samples
-//0x0006_0000   0x0001_0000   18b          587-d02      27C512        BANK0        game program(lo, mask=10)
-//0x0007_0000   0x0001_0000   18c          587-d05      27C512        BANK0        game program(hi, mask=01)
+//0x0006_0000   0x0001_0000   18b          587-d02      27C512        BANK0        game program(lo, mask=01)
+//0x0007_0000   0x0001_0000   18c          587-d05      27C512        BANK0        game program(hi, mask=10)
 //0x0008_0000   0x0000_8000   11j          587-d09      27C256        BRAM         sound program
 //0x0008_8000   0x0000_4000   8g           587-d08      27C128        BRAM         VLM5030 commands  
 //0x0008_C000          <-----------------ROM END----------------->
